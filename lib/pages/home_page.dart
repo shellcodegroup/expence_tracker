@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:expence_tracker/google_sheets_api.dart';
+import 'package:expence_tracker/service/google_sheets_api.dart';
 import 'package:expence_tracker/widgets/loading_circle.dart';
 import 'package:expence_tracker/widgets/shimmer_loader.dart';
 import 'package:expence_tracker/widgets/top_card.dart';
@@ -48,6 +48,9 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         const Text('Expense'),
                         Switch(
+                            activeColor: Colors.green,
+                            inactiveThumbColor: Colors.red,
+                            splashRadius: 5,
                             value: _isIncome,
                             onChanged: (newValue) {
                               setState(() {
@@ -188,6 +191,33 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+// confirm exit dialog
+  void _confirmexit() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text(
+              'Are you sure you want to exit?',
+              style: TextStyle(fontSize: 12),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    SystemNavigator.pop();
+                  },
+                  child: const Text('Yes')),
+              TextButton(
+                  onPressed: () {
+                    // close dialog
+                    Navigator.pop(context);
+                  },
+                  child: const Text('No'))
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     // start loading until the data arrives
@@ -205,8 +235,8 @@ class _HomePageState extends State<HomePage> {
           leading: IconButton(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               onPressed: () {
-                // exit the app
-                SystemNavigator.pop();
+                // are you sure you want to exit dialog
+                _confirmexit();
               },
               icon: Icon(
                 Icons.arrow_back_ios,

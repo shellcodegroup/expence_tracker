@@ -1,4 +1,4 @@
-import 'package:expence_tracker/google_sheets_api.dart';
+import 'package:expence_tracker/service/google_sheets_api.dart';
 import 'package:expence_tracker/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -21,5 +21,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-//https://youtu.be/UeZ1bcEqEQE?t=835
